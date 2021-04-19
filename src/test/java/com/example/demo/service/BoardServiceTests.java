@@ -50,7 +50,17 @@ public class BoardServiceTests {
 
 		}
 
-
+	@Test
+	public void testUpdate() {
+		
+		BoardDTO dto = BoardDTO.builder()
+				.bno(2L)
+				.title("Test.")
+				.content("Test...12312312")
+				//.writerEmail("user55@aaa.com")  
+				.build();
+		boardService.modify(dto);
+		}
 	
 }
 
