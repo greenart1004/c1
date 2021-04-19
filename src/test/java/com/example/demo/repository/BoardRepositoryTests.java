@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
@@ -39,6 +40,17 @@ public class BoardRepositoryTests {
 		System.out.println(board);
 		System.out.println(board.getWriter());
 		}
+	
+	
+	@Test
+	public void testRead3() {
+		Object result = boardRepository.getBoardByBno(100L);
+		Object[] arr = (Object[])result;
+		System.out.println(Arrays.toString(arr));
+		}
+
+	
+	
 	}
 
 	
