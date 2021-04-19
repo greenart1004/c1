@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
@@ -27,4 +28,18 @@ public class BoardRepositoryTests {
 			boardRepository.save(board);
 			});
 		}
+	
+	@Test
+	public void testRead1() {
+		
+		Optional<Board> result = boardRepository.findById(100L); //데이터베이스에 존재하는 번호
+		
+		Board board = result.get();
+		System.out.println(board);
+		System.out.println(board.getWriter());
+		}
+	}
+
+	
+	
 	}
