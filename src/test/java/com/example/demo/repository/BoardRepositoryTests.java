@@ -35,6 +35,7 @@ public class BoardRepositoryTests {
 		Optional<Board> result = boardRepository.findById(100L); //데이터베이스에 존재하는 번호
 		
 		Board board = result.get();
+		
 		System.out.println(board);
 		System.out.println(board.getWriter());
 		}
