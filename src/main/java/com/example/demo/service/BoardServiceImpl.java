@@ -5,6 +5,7 @@ import java.util.function.Function;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dto.BoardDTO;
 import com.example.demo.dto.PageRequestDTO;
@@ -26,8 +27,6 @@ public class BoardServiceImpl implements BoardService{
     private final BoardRepository repository;
 
     private final ReplyRepository replyRepository;
-
-
 
     @Override
     public Long register(BoardDTO dto) {
@@ -56,7 +55,7 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public BoardDTO get(Long bno) {
+    public BoardDTO get(Long bno) {                                            // 게시물의 조회
 
         Object result = repository.getBoardByBno(bno);
 
@@ -65,39 +64,25 @@ public class BoardServiceImpl implements BoardService{
         return entityToDTO((Board)arr[0], (Member)arr[1], (Long)arr[2]);
     }
 
-	@Override
-	public void removeWithReplies(Long bno) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
+    @Transactional
+    @Override
+    public void removeWithReplies(Long bno) { //삭제 기능 구현, 트랜잭션 추가 
+    	        //댓글 부터 삭제 
+    	replyRepository.deleteByBno(bno);   //ReplyRepository에 함수 추가
+    	repository.deleteById(bno);
+    	}
+
+	
+	@Transactional
+	@Override 
 	public void modify(BoardDTO boardDTO) {
-		// TODO Auto-generated method stub
-		
+	  
+       Board board = repository.getOne(boardDTO.getBno());
+  
+       board.changeTitle(boardDTO.getTitle());
+       board.changeContent(boardDTO.getContent());
+ 
+       repository.save(board); 
 	}
-
-	/*
-	 * @Transactional
-	 * 
-	 * @Override public void removeWithReplies(Long bno) {
-	 * 
-	 * //댓글 부터 삭제 replyRepository.deleteByBno(bno);
-	 * 
-	 * repository.deleteById(bno);
-	 * 
-	 * }
-	 * 
-	 * @Transactional
-	 * 
-	 * @Override public void modify(BoardDTO boardDTO) {
-	 * 
-	 * Board board = repository.getOne(boardDTO.getBno());
-	 * 
-	 * 
-	 * board.changeTitle(boardDTO.getTitle());
-	 * board.changeContent(boardDTO.getContent());
-	 * 
-	 * repository.save(board); }
-	 */
 }

@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.demo.entity.Board;
 import com.example.demo.entity.Member;
+import com.example.demo.service.BoardService;
 
 @SpringBootTest
 public class BoardRepositoryTests {
@@ -48,8 +49,6 @@ public class BoardRepositoryTests {
 		Object[] arr = (Object[])result;
 		System.out.println(Arrays.toString(arr));
 		}
-
-	
 	
 	}
 

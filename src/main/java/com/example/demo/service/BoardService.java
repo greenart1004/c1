@@ -47,5 +47,9 @@ public interface BoardService {
         return boardDTO;
 
     }
+    
+
+    
+    
 }
 
