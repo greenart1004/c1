@@ -8,7 +8,7 @@ import com.example.demo.entity.Member;
 
 public interface BoardService {
 
-    Long register(BoardDTO dto);
+    Long register(BoardDTO dto);////
 
     PageResultDTO<BoardDTO, Object[]> getList(PageRequestDTO pageRequestDTO);
 
@@ -18,7 +18,7 @@ public interface BoardService {
 
     void modify(BoardDTO boardDTO);
 
-    default Board dtoToEntity(BoardDTO dto){
+    default Board dtoToEntity(BoardDTO dto){//////////
 
         Member member = Member.builder().email(dto.getWriterEmail()).build();
 
@@ -47,9 +47,4 @@ public interface BoardService {
         return boardDTO;
 
     }
-    
-
-    
-    
 }
-
